@@ -1,4 +1,4 @@
-/* C code produced by gperf version 3.0.1 */
+/* C code produced by gperf version 3.0.3 */
 /* Command-line: gperf -t chinese_custom.gperf  */
 /* Computed positions: -k'1-3' */
 
@@ -111,6 +111,9 @@ hash (str, len)
 
 #ifdef __GNUC__
 __inline
+#ifdef __GNUC_STDC_INLINE__
+__attribute__ ((__gnu_inline__))
+#endif
 #endif
 struct utf8_to_custom *
 in_word_set (str, len)

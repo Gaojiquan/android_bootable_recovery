@@ -5,6 +5,30 @@ require 'iconv'
 require 'RMagick'
 include Magick
 
+# Get font settings from args
+font_width = ARGV[0]
+font_height = ARGV[1]
+font_point_size = ARGV[1]
+
+if nil == font_width
+	puts "please special font_width!"
+	exit
+end
+
+if nil == font_height
+	puts "please special font_height!"
+	exit
+end
+
+if nil == font_point_size
+	puts "please special font_point_size!"
+	exit
+end
+
+puts "font_width : " + font_width
+puts "font_height : " + font_height
+puts "font_point_size : " + font_point_size
+
 s = ''
 # basic printable
 for i in 32...128
@@ -89,8 +113,8 @@ p.read
 p.close
 # gen a **huge** bitmap
 count -= s.length
-char_width = 10
-char_height = 18
+char_width = font_width.to_i
+char_height = font_height.to_i
 asc_width = char_width * s.length
 cjk_width = count * 2 * char_width
 img_width = asc_width + cjk_width
@@ -99,8 +123,8 @@ canvas = Image.new(img_width, img_height)
 # so, bitmap font is better...
 text = Draw.new
 text.gravity = WestGravity
-text.pointsize = 18
-text.font = '/windows/C/Windows/Fonts/simhei.ttf'
+text.pointsize = font_point_size.to_i
+text.font = 'fonts/simhei.ttf'
 p "painting basic ascii"
 for i in 0...96
     ch = s[i, 1]
@@ -109,7 +133,7 @@ for i in 0...96
     text.text(i * char_width, 0, ch)
 end
 text.draw(canvas)
-text.font = '/windows/C/Windows/Fonts/simsun.ttc'
+text.font = 'fonts/simsun.ttc'
 p "painting extra characters"
 for i in 0...count
     ch = Iconv.iconv('utf-8', 'gb2312', c[i * 2, 2])[0]
@@ -150,7 +174,7 @@ k += run_count
 out.push(run_count | (run_val != 0 ? 0x80 : 0x00))
 out.push(0)
 # gen font data
-f = File.open('font.h', 'w')
+f = File.open('font_' + font_width + 'x' + font_height + '.h', 'w')
 f.write("struct {\n")
 f.write("\tunsigned width;\n")
 f.write("\tunsigned height;\n")

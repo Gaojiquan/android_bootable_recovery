@@ -1,0 +1,23 @@
+issue the command "ruby chinese_gen.rb width height pointsize" to generate the chinese font
+for example : ruby ruby chinese_gen.rb 10 18 18
+
+
+-------------------------------------------
+
+user guide:
+
+follow this steps to generate a font.h:
+
+1.sudo apt-get install ruby1.9.1
+
+2.sudo apt-get install ruby1.9.1-dev
+
+3.sudo apt-get install libmagickwand-dev
+
+4.sudo gem1.9.1 install rmagick
+
+5.sudo apt-get install gperf
+
+then you can issue the following command to generate a font.h:
+
+ruby chinese_gen.rb
