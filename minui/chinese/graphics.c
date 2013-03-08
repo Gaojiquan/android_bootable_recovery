@@ -210,7 +210,7 @@ void gr_flip(void)
 }
 
 void gr_color(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
-{
+{   
     GGLContext *gl = gr_context;
     GGLint color[4];
     color[0] = ((r << 8) | r) + 1;
@@ -222,7 +222,7 @@ void gr_color(unsigned char r, unsigned char g, unsigned char b, unsigned char a
 
 int gr_measure(const char *s)
 {
-    return gr_font->cwidth * strlen(s);
+    return gr_font->cwidth * str_utf8_length(s);
 }
 
 void gr_font_size(int *x, int *y)
@@ -434,7 +434,7 @@ int gr_init(void)
     gl->enable(gl, GGL_BLEND);
     gl->blendFunc(gl, GGL_SRC_ALPHA, GGL_ONE_MINUS_SRC_ALPHA);
 
-    gr_fb_blank(true);
+    //gr_fb_blank(true);
     gr_fb_blank(false);
 
     return 0;

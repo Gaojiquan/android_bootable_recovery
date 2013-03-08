@@ -5,19 +5,15 @@ commands_recovery_local_path := $(LOCAL_PATH)
 # LOCAL_CPP_EXTENSION := .c
 
 LOCAL_SRC_FILES := \
-    recovery.c \
     bootloader.c \
     install.c \
     roots.c \
-    ui.c \
     mounts.c \
-    extendedcommands.c \
     nandroid.c \
     ../../system/core/toolbox/reboot.c \
     firmware.c \
     edifyscripting.c \
     setprop.c \
-    default_recovery_ui.c \
     adb_install.c \
     verifier.c
 
@@ -83,6 +79,34 @@ ifeq ($(BOARD_CUSTOM_RECOVERY_KEYMAPPING),)
   LOCAL_SRC_FILES += default_recovery_keys.c
 else
   LOCAL_SRC_FILES += $(BOARD_CUSTOM_RECOVERY_KEYMAPPING)
+endif
+
+# Custom the UI
+ifeq ($(BOARD_CUSTOM_RECOVERY_UI),)
+  LOCAL_SRC_FILES += default_recovery_ui.c
+else
+  LOCAL_SRC_FILES += $(BOARD_CUSTOM_RECOVERY_UI)
+endif
+
+# Custom the UI (extendedcmd)
+ifeq ($(BOARD_CUSTOM_RECOVERY_EXTENDCMD),)
+  LOCAL_SRC_FILES +=  extendedcommands.c
+else
+  LOCAL_SRC_FILES += $(BOARD_CUSTOM_RECOVERY_EXTENDCMD)
+endif
+
+# Custom the UI (user data)
+ifeq ($(BOARD_CUSTOM_RECOVERY_EXTENDCMD_USERDATA),)
+  LOCAL_SRC_FILES +=  recovery.c
+else
+  LOCAL_SRC_FILES += $(BOARD_CUSTOM_RECOVERY_EXTENDCMD_USERDATA)
+endif
+
+# Custom the UI (basic)
+ifeq ($(BOARD_CUSTOM_RECOVERY_UI_BASIC),)
+  LOCAL_SRC_FILES +=  ui.c
+else
+  LOCAL_SRC_FILES += $(BOARD_CUSTOM_RECOVERY_UI_BASIC)
 endif
 
 LOCAL_STATIC_LIBRARIES += libext4_utils_static libz libsparse_static
