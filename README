@@ -1,5 +1,7 @@
 chinese recovery based cwm 6.0.2.8
 
+please set BORAD_REC_LANG_CHINESE := true in your BoardConfig.mk if you want to get a chinese recovery
+
 for more info please read :
 
 https://github.com/Gaojiquan/android_bootable_recovery/blob/master/minui/chinese/README
